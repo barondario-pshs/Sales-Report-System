@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Sales Report - Records</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="card">
+        <h2>Welcome, {{ user[1] }}!</h2>
+        <p>Role: <strong>{{ user[5]|upper }}</strong></p>
+        
+        {% with messages = get_flashed_messages(with_categories=true) %}
+          {% if messages %}
+            {% for category, message in messages %}
+              <div class="alert {{ category }}">{{ message }}</div>
+            {% endfor %}
+          {% endif %}
+        {% endwith %}
+
+        <hr>
+
+        {% if user[5] == 'admin' %}
+            <h3>Staff Sales Overview</h3>
+            <table>
+                <tr>
+                    <th>Username</th>
+                    <th>Full Name</th>
+                    <th>Total Sales</th>
+                    <th>Actions</th>
+                </tr>
+                {% for name, data in all_accounts.items() %}
+                <tr>
+                    <td>{{ name }}</td>
+                    <td>{{ data[1] }}</td>
+                    <td>${{ "{:,.2f}".format(data[4]) }}</td>
+                    <td>
+                        <a href="/update/{{ name }}" style="color: #3498db;">Edit</a> | 
+                        <a href="/delete/{{ name }}" style="color: #e74c3c;">Delete</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </table>
+            <h4>Grand Total Revenue: ${{ "{:,.2f}".format(total) }}</h4>
+            <p><a href="/register">+ Register New Staff</a></p>
+
+        {% else %}
+            <div style="text-align: left; background: #f9f9f9; padding: 15px; border-radius: 8px;">
+                <h3>Your Profile</h3>
+                <p><strong>Age:</strong> {{ user[2] }}</p>
+                <p><strong>Address:</strong> {{ user[3] }}</p>
+                <p><strong>Your Total Sales:</strong> ${{ "{:,.2f}".format(user[4]) }}</p>
+            </div>
+
+            <div style="margin-top: 20px;">
+                <h3>Enter New Sale</h3>
+                <form method="POST">
+                    <input type="number" step="0.01" name="sale_amount" placeholder="Enter amount (e.g. 50.00)" required>
+                    <button type="submit">Submit Sale</button>
+                </form>
+            </div>
+        {% endif %}
+
+        <br><br>
+        <a href="/" class="logout">Logout</a>
+    </div>
+</body>
+</html>

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Update Staff</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h2>Update Info for: {{ uname }}</h2>
+        <form method="POST">
+            <input type="text" name="name" value="{{ user[1] }}" placeholder="Full Name" required>
+            <input type="password" name="password" value="{{ user[0] }}" placeholder="Password" required>
+            <input type="number" name="age" value="{{ user[2] }}" placeholder="Age" required>
+            <input type="text" name="address" value="{{ user[3] }}" placeholder="Address" required>
+            <select name="role">
+                <option value="cashier" {% if user[5] == 'cashier' %}selected{% endif %}>Cashier</option>
+                <option value="admin" {% if user[5] == 'admin' %}selected{% endif %}>Admin</option>
+            </select>
+            <button type="submit">Save Changes</button>
+        </form>
+        <br>
+        <a href="{{ url_for('records_view', username='admin') }}">Cancel</a>
+    </div>
+</body>
+</html>

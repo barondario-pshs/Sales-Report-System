@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Confirm Delete</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="card" style="text-align: center; margin-top: 50px;">
+        <h2 style="color: #e74c3c;">⚠️ Confirm Delete</h2>
+        <p>Are you sure you want to delete <strong>{{ uname }}</strong>?</p>
+        <p>This action cannot be undone.</p>
+        
+        <form method="POST">
+            <button type="submit" style="background: #e74c3c; width: 120px;">Yes, Delete</button>
+            <a href="{{ url_for('records_view', username='admin') }}" 
+               style="display: inline-block; padding: 10px; background: #95a5a6; color: white; text-decoration: none; border-radius: 4px; width: 100px;">
+               Cancel
+            </a>
+        </form>
+    </div>
+</body>
+</html>
