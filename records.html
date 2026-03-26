@@ -9,6 +9,12 @@
         <h2>Welcome, {{ user[1] }}!</h2>
         <p>Role: <strong>{{ user[5]|upper }}</strong></p>
         
+        <div style="margin-bottom: 20px;">
+            <a href="/update/{{ uname }}" class="btn-edit" style="background-color: #ffd700; color: #000080; padding: 5px 15px; border-radius: 5px; text-decoration: none; font-weight: bold;">
+                Edit My Profile
+            </a>
+        </div>
+
         {% with messages = get_flashed_messages(with_categories=true) %}
           {% if messages %}
             {% for category, message in messages %}
@@ -54,7 +60,7 @@
             <div style="margin-top: 20px;">
                 <h3>Enter New Sale</h3>
                 <form method="POST">
-                    <input type="number" step="0.01" name="sale_amount" placeholder="Enter amount (e.g. 50.00)" required>
+                    <input type="number" step="0.01" name="sale_amount" placeholder="Enter amount (e.g. 50.00)">
                     <button type="submit">Submit Sale</button>
                 </form>
             </div>
